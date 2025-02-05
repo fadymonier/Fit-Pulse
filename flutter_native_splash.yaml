@@ -1,0 +1,12 @@
+flutter_native_splash:
+  color: "#F2F4F3"
+  image: assets/images/nativeSplash.png
+
+  android_12:
+    color: "#F2F4F3"
+    image: assets/images/nativeSplash.png
+
+
+#flutter pub run flutter_native_splash:create
+#flutter pub run flutter_launcher_icons:main
+

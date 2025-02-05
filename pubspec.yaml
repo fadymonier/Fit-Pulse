@@ -1,0 +1,59 @@
+name: fitpulse
+description: "A new Flutter project."
+
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.1
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.8
+  flutter_native_splash: ^2.4.3
+  flutter_screenutil: ^5.9.3
+  google_fonts: ^6.2.1
+  get_it: ^8.0.3
+  shared_preferences: ^2.3.5
+  flutter_bloc: ^9.0.0
+  loading_indicator: ^3.1.1
+  firebase_core: ^3.10.1
+  firebase_auth: ^5.4.1
+  firebase_database: ^11.3.1
+  flutter_secure_storage: ^9.2.4
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: "^0.14.2"
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/appIcon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/icons/appIcon.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+
+
+flutter:
+
+ 
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+
+
+
