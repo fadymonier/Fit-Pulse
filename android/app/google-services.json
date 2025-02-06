@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "826252725019",
+    "firebase_url": "https://fitpulse-30e9c-default-rtdb.firebaseio.com",
+    "project_id": "fitpulse-30e9c",
+    "storage_bucket": "fitpulse-30e9c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826252725019:android:ee34dac97cbddea69721be",
+        "android_client_info": {
+          "package_name": "com.example.fitpulse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXesLa09nTL4DkKYqDe4DQf-h6zsc2jeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

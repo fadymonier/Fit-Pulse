@@ -1,10 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fitpulse/core/routes/app_router.dart';
+import 'package:fitpulse/core/utils/app_colors.dart';
+import 'package:fitpulse/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(const FitPulse());
 }
@@ -21,6 +27,8 @@ class FitPulse extends StatelessWidget {
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.system,
+        theme: ThemeData(
+            scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor),
         initialRoute: AppRouter.splash,
         onGenerateRoute: AppRouter.generateRoute,
       ),

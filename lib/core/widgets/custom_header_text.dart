@@ -1,4 +1,3 @@
-import 'package:fitpulse/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomHeaderText extends StatelessWidget {
@@ -8,7 +7,7 @@ class CustomHeaderText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: CustomTextStyles.poppins400style20,
+      // style: CustomTextStyles.poppins400style20,
     );
   }
 }
