@@ -70,7 +70,9 @@ class SigninScreen extends StatelessWidget {
                   width: double.infinity,
                   child: AppCustomBtn(
                       color: AppColors.mainColor,
-                      onPressed: () {},
+                      onPressed: () {
+                        context.pushReplacementNamed("/Home");
+                      },
                       text: "Login"),
                 ),
               ],

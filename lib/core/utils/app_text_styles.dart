@@ -34,6 +34,16 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w400,
     color: AppColors.greyColor,
   );
+  static final roboto16MainColor700 = GoogleFonts.roboto(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.mainColor,
+  );
+  static final roboto12MainColor500 = GoogleFonts.roboto(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.mainColor,
+  );
   static final buttonTextStyle = GoogleFonts.roboto(
     fontSize: 16.sp,
     fontWeight: FontWeight.w800,

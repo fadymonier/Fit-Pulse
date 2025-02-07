@@ -28,6 +28,11 @@ class FitPulse extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.system,
         theme: ThemeData(
+            appBarTheme: AppBarTheme(
+                shadowColor: AppColors.blackColor,
+                toolbarHeight: 90.h,
+                elevation: 0.5,
+                backgroundColor: AppColors.scaffoldBackgroundColor),
             scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor),
         initialRoute: AppRouter.splash,
         onGenerateRoute: AppRouter.generateRoute,
