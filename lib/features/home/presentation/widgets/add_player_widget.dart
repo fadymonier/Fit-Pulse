@@ -1,3 +1,4 @@
+import 'package:fitpulse/core/extensions/extensions.dart';
 import 'package:fitpulse/core/utils/app_colors.dart';
 import 'package:fitpulse/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +29,14 @@ class AddPlayerWidget extends StatelessWidget {
                 .copyWith(fontWeight: FontWeight.w400),
           ),
           Spacer(),
-          Icon(
-            Icons.add_circle_outline,
-            color: AppColors.mainColor,
+          GestureDetector(
+            onTap: () {
+              context.pushNamed("/AddPlayer");
+            },
+            child: Icon(
+              Icons.add_circle_outline,
+              color: AppColors.mainColor,
+            ),
           ),
           SizedBox(
             width: 20.w,
