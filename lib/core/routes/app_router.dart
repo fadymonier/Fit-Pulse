@@ -20,7 +20,7 @@ class AppRouter {
   static const String playetStatistics = "/PlayetStatistics";
   static const String addPlayer = "/AddPlayer";
 
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+  static Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
@@ -42,11 +42,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const AddPlayerScreen());
 
       default:
-        return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(child: Text('Page Not Found')),
-          ),
-        );
+        return null;
     }
   }
 }
