@@ -37,7 +37,7 @@ class PlayerStatstics extends StatelessWidget {
                     child: Image.asset("assets/images/marmoushContainer.png"))
               ],
             ),
-            ECGChartWidget(number: 4095),
+            ECGChartWidget(number: 50),
             SizedBox(
               height: 20.h,
             ),

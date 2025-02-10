@@ -22,6 +22,10 @@ class AppTextField extends StatefulWidget {
     required this.prefixIcon,
     this.showSuffixIcon = false,
     this.errorText,
+    required String? Function(dynamic value) validator,
+    required TextInputType keyboardType,
+    required void Function(dynamic _) onChanged,
+    MaterialColor? borderColor,
   });
 
   @override

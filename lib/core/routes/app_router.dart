@@ -25,11 +25,11 @@ class AppRouter {
       case splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case forgetPassword:
-        return MaterialPageRoute(builder: (_) => const ForgetPasswordScreen());
+        return MaterialPageRoute(builder: (_) => ForgetPasswordScreen());
       case onBoarding:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
       case signIn:
-        return MaterialPageRoute(builder: (_) => const SigninScreen());
+        return MaterialPageRoute(builder: (_) => SigninScreen());
       case register:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case home:

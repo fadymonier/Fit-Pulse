@@ -71,6 +71,7 @@ class ECGChartWidgetState extends State<ECGChartWidget> {
                   ),
                 ],
               ),
+              SizedBox(height: 20.h),
               Expanded(
                 child: LineChart(
                   LineChartData(
@@ -90,7 +91,9 @@ class ECGChartWidgetState extends State<ECGChartWidget> {
                           getTitlesWidget: (value, meta) {
                             if (value < widget.number / 6) return Container();
                             return Padding(
-                              padding: EdgeInsets.only(right: 6.0),
+                              padding: EdgeInsets.only(
+                                  right: 6.0,
+                                  bottom: 4.0), // Adjust bottom padding
                               child: Text(
                                 value >= 1000
                                     ? '${(value / 1000).toStringAsFixed(1)}K'
@@ -104,32 +107,23 @@ class ECGChartWidgetState extends State<ECGChartWidget> {
                       ),
                       rightTitles: AxisTitles(
                         sideTitles: SideTitles(
-                          showTitles: true,
-                          interval: widget.number > 1000
-                              ? widget.number / 4
-                              : widget.number / 5,
-                          reservedSize: 50,
-                          getTitlesWidget: (value, meta) {
-                            if (value < widget.number / 6) return Container();
-                            return Padding(
-                              padding: EdgeInsets.only(left: 6.0),
-                              child: Text(
-                                value >= 1000
-                                    ? '${(value / 1000).toStringAsFixed(1)}K'
-                                    : value.toInt().toString(),
-                                style: TextStyle(
-                                    fontSize: 12, fontWeight: FontWeight.bold),
-                              ),
-                            );
-                          },
+                          showTitles: false, // Disable right titles
+                        ),
+                      ),
+                      topTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: false, // Disable top titles
                         ),
                       ),
                       bottomTitles: AxisTitles(
                         sideTitles: SideTitles(
                           showTitles: true,
+                          reservedSize:
+                              30, // Adjust reserved size for bottom titles
                           getTitlesWidget: (value, meta) {
                             return Padding(
-                              padding: EdgeInsets.only(top: 4.0),
+                              padding: EdgeInsets.only(
+                                  top: 4.0), // Adjust top padding
                               child: Text(
                                 value.toInt().toString(),
                                 style: TextStyle(fontSize: 12),
@@ -149,7 +143,7 @@ class ECGChartWidgetState extends State<ECGChartWidget> {
                         color: AppColors.mainColor,
                         barWidth: 2.w,
                         isStrokeCapRound: true,
-                        dotData: FlDotData(show: true),
+                        dotData: FlDotData(show: false),
                         belowBarData: BarAreaData(show: false),
                       ),
                     ],

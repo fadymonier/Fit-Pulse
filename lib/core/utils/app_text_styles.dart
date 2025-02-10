@@ -49,6 +49,21 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w500,
     color: AppColors.mainColor,
   );
+  static final roboto18BlackColor500 = GoogleFonts.roboto(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.blackColor,
+  );
+  static final roboto18RedColor500 = GoogleFonts.roboto(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.errorColor,
+  );
+  //static final roboto20BlackColor700 = GoogleFonts.roboto(
+  //   fontSize: 20.sp,
+  //   fontWeight: FontWeight.w700,
+  //   color: AppColors.blackColor,
+  // );
   static final buttonTextStyle = GoogleFonts.roboto(
     fontSize: 16.sp,
     fontWeight: FontWeight.w800,
