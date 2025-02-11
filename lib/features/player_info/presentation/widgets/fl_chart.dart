@@ -3,7 +3,6 @@ import 'package:fitpulse/core/utils/app_colors.dart';
 import 'package:fitpulse/core/utils/app_text_styles.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ECGChartWidget extends StatefulWidget {
@@ -33,10 +32,10 @@ class ECGChartWidgetState extends State<ECGChartWidget> {
   }
 
   void generateGraphData() {
-    Random random = Random();
     spots = List.generate(
       10,
-      (index) => FlSpot(index.toDouble(), random.nextDouble() * widget.number),
+      (index) =>
+          FlSpot(index.toDouble(), (widget.number * (index % 3)).toDouble()),
     );
     setState(() {});
   }
@@ -45,7 +44,7 @@ class ECGChartWidgetState extends State<ECGChartWidget> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 230.h,
+      height: 250.h,
       child: Card(
         elevation: 5,
         color: AppColors.whiteColor,
@@ -84,16 +83,12 @@ class ECGChartWidgetState extends State<ECGChartWidget> {
                       leftTitles: AxisTitles(
                         sideTitles: SideTitles(
                           showTitles: true,
-                          interval: widget.number > 1000
-                              ? widget.number / 4
-                              : widget.number / 5,
+                          interval: widget.number > 0 ? widget.number / 5 : 1,
                           reservedSize: 50,
                           getTitlesWidget: (value, meta) {
                             if (value < widget.number / 6) return Container();
                             return Padding(
-                              padding: EdgeInsets.only(
-                                  right: 6.0,
-                                  bottom: 4.0), // Adjust bottom padding
+                              padding: EdgeInsets.only(right: 6.0, bottom: 4.0),
                               child: Text(
                                 value >= 1000
                                     ? '${(value / 1000).toStringAsFixed(1)}K'
@@ -106,27 +101,21 @@ class ECGChartWidgetState extends State<ECGChartWidget> {
                         ),
                       ),
                       rightTitles: AxisTitles(
-                        sideTitles: SideTitles(
-                          showTitles: false, // Disable right titles
-                        ),
+                        sideTitles: SideTitles(showTitles: false),
                       ),
                       topTitles: AxisTitles(
-                        sideTitles: SideTitles(
-                          showTitles: false, // Disable top titles
-                        ),
+                        sideTitles: SideTitles(showTitles: false),
                       ),
                       bottomTitles: AxisTitles(
                         sideTitles: SideTitles(
                           showTitles: true,
-                          reservedSize:
-                              30, // Adjust reserved size for bottom titles
+                          reservedSize: 30,
                           getTitlesWidget: (value, meta) {
                             return Padding(
-                              padding: EdgeInsets.only(
-                                  top: 4.0), // Adjust top padding
+                              padding: EdgeInsets.only(top: 4.0.r),
                               child: Text(
                                 value.toInt().toString(),
-                                style: TextStyle(fontSize: 12),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                             );
                           },
@@ -139,7 +128,7 @@ class ECGChartWidgetState extends State<ECGChartWidget> {
                     lineBarsData: [
                       LineChartBarData(
                         spots: spots,
-                        isCurved: false,
+                        isCurved: true,
                         color: AppColors.mainColor,
                         barWidth: 2.w,
                         isStrokeCapRound: true,

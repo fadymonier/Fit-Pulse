@@ -1,3 +1,7 @@
+// ignore_for_file: avoid_print
+
+import 'dart:convert';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitpulse/firebase/models/add_player_model.dart';
 
@@ -15,14 +19,36 @@ class FirebaseDataFunctions {
     );
   }
 
-  static void addPlayerData(AddPlayerDataModel addPlayerDataModel) {
-    var collection = getPlayersCollection();
-    var docRef = collection.doc();
-    addPlayerDataModel.id = docRef.id;
-    docRef.set(addPlayerDataModel);
+  static Future<void> addPlayerData(
+      AddPlayerDataModel addPlayerDataModel, File file) async {
+    try {
+      var collection = getPlayersCollection();
+      var docRef = collection.doc();
+      addPlayerDataModel.id = docRef.id;
+
+      if (addPlayerDataModel.imageUrl != null &&
+          addPlayerDataModel.imageUrl!.isNotEmpty) {
+        addPlayerDataModel.imageUrl =
+            await convertImageToBase64(File(addPlayerDataModel.imageUrl!));
+      }
+
+      await docRef.set(addPlayerDataModel);
+    } catch (e) {
+      print("❌ Error adding player data: $e");
+    }
   }
 
   static Future<QuerySnapshot<AddPlayerDataModel>> getPlayersData() {
     return getPlayersCollection().get();
+  }
+
+  static Future<String> convertImageToBase64(File imageFile) async {
+    try {
+      List<int> imageBytes = await imageFile.readAsBytes();
+      return base64Encode(imageBytes);
+    } catch (e) {
+      print("❌ Error converting image to Base64: $e");
+      return "";
+    }
   }
 }

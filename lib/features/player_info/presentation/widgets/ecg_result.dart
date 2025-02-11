@@ -5,15 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ECGResultWidget extends StatelessWidget {
-  const ECGResultWidget({
+  String status = "Loading";
+  String? percentage;
+  ECGResultWidget({
     super.key,
+    required this.status,
+    required this.percentage,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 125.h,
+      height: 100.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
         color: AppColors.lightGreenColor,
@@ -32,17 +36,13 @@ class ECGResultWidget extends StatelessWidget {
                 SizedBox(
                   height: 18.h,
                 ),
-                Text(
-                  "Normal",
-                  style: AppTextStyles.roboto20BlackColor700,
-                )
               ],
             ),
             Spacer(),
             Row(
               children: [
                 Text(
-                  "95%",
+                  percentage ?? "100%",
                   style: AppTextStyles.roboto20BlackColor700,
                 ),
                 SizedBox(
