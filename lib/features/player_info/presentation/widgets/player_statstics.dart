@@ -1,5 +1,5 @@
 import 'package:fitpulse/core/extensions/extensions.dart';
-import 'package:fitpulse/features/player_info/presentation/widgets/acceleration.dart';
+import 'package:fitpulse/features/player_info/presentation/widgets/acceleration_and_distance.dart';
 import 'package:fitpulse/features/player_info/presentation/widgets/ecg_result.dart';
 import 'package:fitpulse/features/player_info/presentation/widgets/fl_chart.dart';
 import 'package:fitpulse/features/player_info/presentation/widgets/lactic_acid_level.dart';

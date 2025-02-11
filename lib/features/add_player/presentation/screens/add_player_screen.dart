@@ -3,7 +3,6 @@
 import 'dart:io';
 import 'package:fitpulse/core/extensions/extensions.dart';
 import 'package:fitpulse/core/utils/app_colors.dart';
-import 'package:fitpulse/core/utils/app_text_styles.dart';
 import 'package:fitpulse/core/widgets/custom_btn.dart';
 import 'package:fitpulse/features/add_player/presentation/widgets/add_pic.dart';
 import 'package:fitpulse/features/add_player/presentation/widgets/all_fields.dart';

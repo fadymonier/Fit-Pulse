@@ -8,6 +8,7 @@ import 'package:sensors_plus/sensors_plus.dart';
 import 'package:fitpulse/core/models/app_title.dart';
 import 'package:fitpulse/core/utils/app_colors.dart';
 import 'package:fitpulse/core/utils/app_text_styles.dart';
+import 'dart:math' as math;
 
 class AccelerationWidget extends StatefulWidget {
   const AccelerationWidget({
@@ -19,21 +20,38 @@ class AccelerationWidget extends StatefulWidget {
 }
 
 class AccelerationWidgetState extends State<AccelerationWidget> {
-  double x = 0.0;
-  double y = 0.0;
-  double z = 0.0;
+  double _acceleration = 0.0; // Single acceleration value in m/s²
+  bool _isMoving = false; // Track if the device is moving
 
   @override
   void initState() {
     super.initState();
-    // Listen to accelerometer events
-    accelerometerEvents.listen((AccelerometerEvent event) {
+    _startListeningToAccelerometer();
+  }
+
+  void _startListeningToAccelerometer() {
+    // Listen to linear accelerometer events (excludes gravity)
+    userAccelerometerEvents.listen((UserAccelerometerEvent event) {
+      // Calculate the magnitude of the acceleration vector
+      double magnitude = _calculateMagnitude(event.x, event.y, event.z);
+
+      // Define a threshold for movement detection
+      double movementThreshold = 0.1; // Adjust this value as needed
+
+      // Check if the device is moving
+      bool isMoving = magnitude > movementThreshold;
+
+      // Update the UI
       setState(() {
-        x = event.x;
-        y = event.y;
-        z = event.z;
+        _acceleration = magnitude; // Use magnitude directly (in m/s²)
+        _isMoving = isMoving;
       });
     });
+  }
+
+  // Helper function to calculate the magnitude of the acceleration vector
+  double _calculateMagnitude(double x, double y, double z) {
+    return math.sqrt(x * x + y * y + z * z);
   }
 
   @override
@@ -43,7 +61,7 @@ class AccelerationWidgetState extends State<AccelerationWidget> {
       child: Center(
         child: Container(
           width: double.infinity,
-          height: 130.h,
+          height: 120.h,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -58,36 +76,39 @@ class AccelerationWidgetState extends State<AccelerationWidget> {
           ),
           child: Row(
             children: [
-              Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(12.0.r),
-                    child: AppTitle(
-                        title: "Acceleration",
-                        showDivider: true,
-                        textStyle: AppTextStyles.roboto20MainColor700),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text("X: $x m/s²",
-                          style: AppTextStyles.roboto14BlackColor700),
-                      Text("Y: $y m/s²",
-                          style: AppTextStyles.roboto14BlackColor700),
-                      Text("Z: $z m/s²",
-                          style: AppTextStyles.roboto14BlackColor700),
-                    ],
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(12.0.r),
+                      child: AppTitle(
+                          title: "Acceleration",
+                          showDivider: true,
+                          textStyle: AppTextStyles.roboto20MainColor700),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 12.0.r),
+                      child: Text(
+                        _isMoving
+                            ? "${_acceleration.toStringAsFixed(2)} m/s²"
+                            : "Not Moving",
+                        style: AppTextStyles.roboto14BlackColor700,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              Spacer(),
               Align(
-                alignment: Alignment.bottomRight,
+                alignment: Alignment.centerRight,
                 child: Padding(
-                  padding: EdgeInsets.only(right: 5.0.r),
-                  child: Icon(Icons.speed_rounded,
-                      size: 60.sp, color: AppColors.mainColor),
+                  padding: EdgeInsets.all(5.0.r),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Icon(Icons.speed,
+                        size: 60.sp, color: AppColors.mainColor),
+                  ),
                 ),
               ),
             ],
