@@ -10,6 +10,7 @@ class AddPlayerDataModel {
   String? height;
   String? lacticAcid;
   String? city;
+  String? userId;
 
   AddPlayerDataModel({
     this.id,
@@ -23,6 +24,7 @@ class AddPlayerDataModel {
     required this.height,
     required this.lacticAcid,
     required this.city,
+    required this.userId,
   });
 
   AddPlayerDataModel.fromJson(Map<String, dynamic> json)
@@ -36,7 +38,8 @@ class AddPlayerDataModel {
         weight = json['weight'] ?? "",
         height = json['height'] ?? "",
         lacticAcid = json['lacticAcid'] ?? "",
-        city = json['city'] ?? "";
+        city = json['city'] ?? "",
+        userId = json['userId'] ?? "";
 
   Map<String, dynamic> toJson() {
     return {
@@ -51,6 +54,7 @@ class AddPlayerDataModel {
       'height': height,
       'lacticAcid': lacticAcid,
       'city': city,
+      'userId': userId
     };
   }
 }

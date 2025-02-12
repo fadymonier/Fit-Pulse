@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitpulse/firebase/models/add_player_model.dart';
 
 class FirebaseDataFunctions {
@@ -39,7 +40,9 @@ class FirebaseDataFunctions {
   }
 
   static Future<QuerySnapshot<AddPlayerDataModel>> getPlayersData() {
-    return getPlayersCollection().get();
+    return getPlayersCollection()
+        .where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
   }
 
   static Future<String> convertImageToBase64(File imageFile) async {

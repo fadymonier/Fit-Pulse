@@ -1,12 +1,14 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitpulse/core/extensions/extensions.dart';
 import 'package:fitpulse/core/utils/app_colors.dart';
 import 'package:fitpulse/core/widgets/custom_btn.dart';
 import 'package:fitpulse/features/add_player/presentation/widgets/add_pic.dart';
 import 'package:fitpulse/features/add_player/presentation/widgets/all_fields.dart';
 import 'package:fitpulse/features/add_player/presentation/widgets/top_bar.dart';
+import 'package:fitpulse/firebase/functions/firebase_auth_functions.dart';
 import 'package:fitpulse/firebase/functions/firebase_data_functions.dart';
 import 'package:fitpulse/firebase/models/add_player_model.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +89,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
       imageUrl: "",
       lacticAcid: lacticAcidController.text,
       city: cityController.text,
+      userId: FirebaseAuth.instance.currentUser!.uid,
     );
 
     await FirebaseDataFunctions.addPlayerData(
@@ -134,7 +137,10 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: isLoading
-                        ? Center(child: CircularProgressIndicator())
+                        ? Center(
+                            child: CircularProgressIndicator(
+                            color: AppColors.mainColor,
+                          ))
                         : AppCustomBtn(
                             color: AppColors.mainColor,
                             text: "Confirm Data",
