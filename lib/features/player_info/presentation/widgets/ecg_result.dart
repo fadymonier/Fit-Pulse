@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:fitpulse/core/models/app_title.dart';
 import 'package:fitpulse/core/utils/app_colors.dart';
 import 'package:fitpulse/core/utils/app_text_styles.dart';
