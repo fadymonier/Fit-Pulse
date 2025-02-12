@@ -8,7 +8,6 @@ import 'package:fitpulse/core/widgets/custom_btn.dart';
 import 'package:fitpulse/features/add_player/presentation/widgets/add_pic.dart';
 import 'package:fitpulse/features/add_player/presentation/widgets/all_fields.dart';
 import 'package:fitpulse/features/add_player/presentation/widgets/top_bar.dart';
-import 'package:fitpulse/firebase/functions/firebase_auth_functions.dart';
 import 'package:fitpulse/firebase/functions/firebase_data_functions.dart';
 import 'package:fitpulse/firebase/models/add_player_model.dart';
 import 'package:flutter/material.dart';

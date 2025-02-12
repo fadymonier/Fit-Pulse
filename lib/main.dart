@@ -2,8 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fitpulse/core/routes/app_router.dart';
 import 'package:fitpulse/core/utils/app_colors.dart';
 import 'package:fitpulse/firebase_options.dart';
+import 'package:fitpulse/provider/my_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +14,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const FitPulse());
+  runApp(ChangeNotifierProvider(
+      create: (context) => MyProvider(), child: const FitPulse()));
 }
 
 class FitPulse extends StatelessWidget {
@@ -20,6 +23,7 @@ class FitPulse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<MyProvider>(context);
     return ScreenUtilInit(
       designSize: const Size(412, 917),
       minTextAdapt: true,
@@ -34,7 +38,8 @@ class FitPulse extends StatelessWidget {
                 elevation: 0.5,
                 backgroundColor: AppColors.scaffoldBackgroundColor),
             scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor),
-        initialRoute: AppRouter.splash,
+        initialRoute:
+            provider.firebaseUser != null ? AppRouter.home : AppRouter.splash,
         onGenerateRoute: AppRouter.generateRoute,
       ),
     );

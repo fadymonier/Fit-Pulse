@@ -88,4 +88,11 @@ class FirebaseAuthFunctions {
     var docRef = collection.doc(userAuthModel.id);
     return docRef.set(userAuthModel);
   }
+
+  static Future<UserAuthModel?> readUser() async {
+    String id = FirebaseAuth.instance.currentUser!.uid;
+    DocumentSnapshot<UserAuthModel> snap =
+        await getUserAuthCollection().doc(id).get();
+    return snap.data();
+  }
 }

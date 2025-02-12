@@ -5,12 +5,13 @@ class UserAuthModel {
   String? phone;
   String? gender;
 
-  UserAuthModel(
-      {this.id,
-      required this.email,
-      required this.name,
-      required this.phone,
-      required this.gender});
+  UserAuthModel({
+    this.id,
+    required this.email,
+    required this.name,
+    required this.phone,
+    required this.gender,
+  });
 
   UserAuthModel.fromJson(Map<String, dynamic> json)
       : this(

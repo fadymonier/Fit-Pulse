@@ -10,6 +10,7 @@ import 'package:fitpulse/features/splash/presentation/screen/splash_screen.dart'
 import 'package:flutter/material.dart';
 
 class AppRouter {
+  // Route names
   static const String splash = "/";
   static const String onBoarding = "/OnBoarding";
   static const String signIn = "/SignIn";
@@ -24,14 +25,14 @@ class AppRouter {
     switch (settings.name) {
       case splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
-      case forgetPassword:
-        return MaterialPageRoute(builder: (_) => ForgetPasswordScreen());
       case onBoarding:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
       case signIn:
         return MaterialPageRoute(builder: (_) => SigninScreen());
       case register:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
+      case forgetPassword:
+        return MaterialPageRoute(builder: (_) => ForgetPasswordScreen());
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case playerInfo:
@@ -40,9 +41,14 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const PlayerStatstics());
       case addPlayer:
         return MaterialPageRoute(builder: (_) => const AddPlayerScreen());
-
       default:
-        return null;
+        return MaterialPageRoute(
+          builder: (_) => Scaffold(
+            body: Center(
+              child: Text('No route defined for ${settings.name}'),
+            ),
+          ),
+        );
     }
   }
 }
