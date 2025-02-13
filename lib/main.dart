@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fitpulse/core/routes/app_router.dart';
 import 'package:fitpulse/core/utils/app_colors.dart';
 import 'package:fitpulse/firebase_options.dart';
-import 'package:fitpulse/provider/my_provider.dart';
+import 'package:fitpulse/manager/my_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';

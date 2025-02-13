@@ -4,8 +4,9 @@ import 'package:fitpulse/features/auth/register/presentation/screens/register_sc
 import 'package:fitpulse/features/auth/signin/presentation/screens/signin_screen.dart';
 import 'package:fitpulse/features/home/presentation/screens/home_screen.dart';
 import 'package:fitpulse/features/onboarding/presentation/screen/onboarding_screen.dart';
+import 'package:fitpulse/features/player_info/presentation/screens/added_player_info.dart';
 import 'package:fitpulse/features/player_info/presentation/screens/player_info_screen.dart';
-import 'package:fitpulse/features/player_info/presentation/widgets/player_statstics.dart';
+import 'package:fitpulse/features/player_info/presentation/widgets/marmoush/player_statstics.dart';
 import 'package:fitpulse/features/splash/presentation/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ class AppRouter {
   static const String forgetPassword = "/ForgetPassword";
   static const String home = "/Home";
   static const String playerInfo = "/PlayerInfo";
+  static const String addedPlayerInfo = "/AddedPlayerInfo";
   static const String playetStatistics = "/PlayetStatistics";
   static const String addPlayer = "/AddPlayer";
 
@@ -41,6 +43,19 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const PlayerStatstics());
       case addPlayer:
         return MaterialPageRoute(builder: (_) => const AddPlayerScreen());
+      case addedPlayerInfo:
+        return MaterialPageRoute(
+            builder: (_) => AddedPlayerInfo(
+                  imagePath: 'assets/images/default_avatar.png',
+                  name: 'Salah',
+                  phone: '+21235458564',
+                  age: '30',
+                  couch: 'Guardiola',
+                  weight: '80',
+                  height: '180',
+                  lacticAcid: '0.1',
+                  city: 'Liverpool',
+                ));
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

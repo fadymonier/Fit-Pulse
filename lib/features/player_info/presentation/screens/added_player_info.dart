@@ -1,24 +1,61 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:fitpulse/core/utils/app_colors.dart';
-import 'package:fitpulse/features/player_info/presentation/widgets/marmoush/body.dart';
+import 'package:fitpulse/features/player_info/presentation/widgets/added_player/added_player_screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/marmoush/player_statstics.dart';
 
-class PlayerInfoScreen extends StatefulWidget {
-  const PlayerInfoScreen({super.key});
+class AddedPlayerInfo extends StatefulWidget {
+  String? imagePath;
+  String? name;
+  String? phone;
+  String? age;
+  String? couch;
+  String? weight;
+  String? height;
+  String? lacticAcid;
+  String? city;
+  AddedPlayerInfo(
+      {super.key,
+      required this.imagePath,
+      required this.name,
+      required this.phone,
+      required this.age,
+      required this.couch,
+      required this.weight,
+      required this.height,
+      required this.lacticAcid,
+      required this.city});
 
   @override
-  State<PlayerInfoScreen> createState() => _PlayerInfoScreenState();
+  State<AddedPlayerInfo> createState() => _PlayerInfoScreenState();
 }
 
-class _PlayerInfoScreenState extends State<PlayerInfoScreen> {
+class _PlayerInfoScreenState extends State<AddedPlayerInfo> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [
-    PlayerInfoScreenBody(), // ------------------------------------------------------------------------------
-    PlayerStatstics(), // -----------------------------------------------------------------------------------
-  ];
+  late List<Widget> _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = [
+      AddedPlayerScreenBody(
+        imagePath: widget.imagePath!,
+        name: widget.name!,
+        phone: widget.phone!,
+        age: widget.age!,
+        couch: widget.couch!,
+        weight: widget.weight!,
+        height: widget.height!,
+        lacticAcid: widget.lacticAcid!,
+        city: widget.city!,
+      ),
+      PlayerStatstics(),
+    ];
+  }
 
   void _onItemTapped(int index) {
     setState(() {

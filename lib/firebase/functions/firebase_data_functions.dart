@@ -1,10 +1,10 @@
 // ignore_for_file: avoid_print
 
-import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitpulse/firebase/models/add_player_model.dart';
+import 'package:path_provider/path_provider.dart';
 
 class FirebaseDataFunctions {
   static CollectionReference<AddPlayerDataModel> getPlayersCollection() {
@@ -20,6 +20,19 @@ class FirebaseDataFunctions {
     );
   }
 
+  static Future<String> saveImageLocally(File imageFile) async {
+    try {
+      final directory = await getApplicationDocumentsDirectory();
+      final String newPath =
+          '${directory.path}/${DateTime.now().millisecondsSinceEpoch}.png';
+      final File newImage = await imageFile.copy(newPath);
+      return newImage.path;
+    } catch (e) {
+      print("❌ Error saving image locally: $e");
+      return "";
+    }
+  }
+
   static Future<void> addPlayerData(
       AddPlayerDataModel addPlayerDataModel, File file) async {
     try {
@@ -27,11 +40,7 @@ class FirebaseDataFunctions {
       var docRef = collection.doc();
       addPlayerDataModel.id = docRef.id;
 
-      if (addPlayerDataModel.imageUrl != null &&
-          addPlayerDataModel.imageUrl!.isNotEmpty) {
-        addPlayerDataModel.imageUrl =
-            await convertImageToBase64(File(addPlayerDataModel.imageUrl!));
-      }
+      addPlayerDataModel.imageUrl = await saveImageLocally(file);
 
       await docRef.set(addPlayerDataModel);
     } catch (e) {
@@ -45,13 +54,22 @@ class FirebaseDataFunctions {
         .get();
   }
 
-  static Future<String> convertImageToBase64(File imageFile) async {
+  static Future<void> deletePlayer(String playerId, String? imagePath) async {
     try {
-      List<int> imageBytes = await imageFile.readAsBytes();
-      return base64Encode(imageBytes);
+      await getPlayersCollection().doc(playerId).delete();
+      print("✅ Player deleted from Firestore: $playerId");
+
+      if (imagePath != null && imagePath.isNotEmpty) {
+        File imageFile = File(imagePath);
+        if (imageFile.existsSync()) {
+          await imageFile.delete();
+          print("✅ Player image deleted locally: $imagePath");
+        } else {
+          print("⚠️ Image file not found: $imagePath");
+        }
+      }
     } catch (e) {
-      print("❌ Error converting image to Base64: $e");
-      return "";
+      print("❌ Error deleting player: $e");
     }
   }
 }

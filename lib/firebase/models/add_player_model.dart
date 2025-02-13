@@ -29,7 +29,7 @@ class AddPlayerDataModel {
 
   AddPlayerDataModel.fromJson(Map<String, dynamic> json)
       : id = json['id'] ?? "",
-        imageUrl = json['image'] ?? "",
+        imageUrl = json['imageUrl'] ?? "",
         name = json['name'] ?? "",
         gender = json['gender'] ?? "",
         phone = json['phone'] ?? "",
@@ -44,7 +44,7 @@ class AddPlayerDataModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'image': imageUrl,
+      'imageUrl': imageUrl,
       'name': name,
       'gender': gender,
       'phone': phone,

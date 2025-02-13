@@ -1,27 +1,45 @@
-// ignore_for_file: must_be_immutable
-
+import 'dart:io';
 import 'package:fitpulse/core/utils/app_colors.dart';
 import 'package:fitpulse/core/utils/app_text_styles.dart';
+import 'package:fitpulse/features/player_info/presentation/screens/added_player_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NewPlayerModel extends StatelessWidget {
-  final String? imageUrl;
+  final ImageProvider<Object>? imageProvider;
   final String? name;
   final String? age;
+  final String? imagePath;
 
   const NewPlayerModel({
     super.key,
-    required this.imageUrl,
+    required this.imageProvider,
     required this.name,
     required this.age,
+    required this.imagePath,
+    String? imageUrl,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // context.pushNamed("/PlayerInfo");
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AddedPlayerInfo(
+              imagePath: imagePath ?? "assets/images/default_avatar.png",
+              name: name,
+              phone: '+21235458564',
+              age: age,
+              couch: 'Guardiola',
+              weight: '80',
+              height: '180',
+              lacticAcid: '0.1',
+              city: 'Liverpool',
+            ),
+          ),
+        );
       },
       child: Container(
         height: 80.h,
@@ -37,12 +55,7 @@ class NewPlayerModel extends StatelessWidget {
             SizedBox(width: 10.w),
             CircleAvatar(
               radius: 30.r,
-              backgroundImage: imageUrl != null && imageUrl!.isNotEmpty
-                  ? NetworkImage(imageUrl!)
-                  : null,
-              child: imageUrl == null || imageUrl!.isEmpty
-                  ? Icon(Icons.person, size: 30.sp, color: AppColors.greyColor)
-                  : null,
+              backgroundImage: imageProvider,
             ),
             SizedBox(width: 18.w),
             Column(

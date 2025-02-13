@@ -2,10 +2,11 @@ import 'package:fitpulse/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
 class AddPicWidget extends StatefulWidget {
-  final Function(File) onImageSelected;
+  final Function(String) onImageSelected; // تعديل لاستقبال المسار بدلًا من ملف
 
   const AddPicWidget({super.key, required this.onImageSelected});
 
@@ -14,20 +15,29 @@ class AddPicWidget extends StatefulWidget {
 }
 
 class AddPicWidgetState extends State<AddPicWidget> {
-  File? _image;
+  String? _imagePath; // بدل File بنستخدم مسار الصورة
 
   Future<void> _pickImage() async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      File imageFile = File(pickedFile.path);
+      final savedPath = await _saveImageLocally(File(pickedFile.path));
+
       setState(() {
-        _image = imageFile;
+        _imagePath = savedPath;
       });
 
-      widget.onImageSelected(imageFile);
+      widget.onImageSelected(savedPath); // إرسال المسار بدل ملف الصورة
     }
+  }
+
+  Future<String> _saveImageLocally(File imageFile) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final localPath =
+        '${directory.path}/${DateTime.now().millisecondsSinceEpoch}.png';
+    final savedImage = await imageFile.copy(localPath);
+    return savedImage.path;
   }
 
   @override
@@ -40,14 +50,14 @@ class AddPicWidgetState extends State<AddPicWidget> {
         decoration: BoxDecoration(
           color: AppColors.lightGreyColor,
           borderRadius: BorderRadius.circular(100.r),
-          image: _image != null
+          image: _imagePath != null
               ? DecorationImage(
-                  image: FileImage(_image!),
+                  image: FileImage(File(_imagePath!)),
                   fit: BoxFit.cover,
                 )
               : null,
         ),
-        child: _image == null
+        child: _imagePath == null
             ? Icon(
                 Icons.note_add,
                 size: 40.sp,

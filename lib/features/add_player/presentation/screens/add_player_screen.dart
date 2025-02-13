@@ -32,7 +32,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
   final TextEditingController lacticAcidController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
 
-  File? selectedImage;
+  String? selectedImagePath;
   String selectedGender = "Male";
   bool isLoading = false;
 
@@ -49,14 +49,14 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
     super.dispose();
   }
 
-  void _handleImageSelected(File image) {
+  void _handleImageSelected(String imagePath) {
     setState(() {
-      selectedImage = image;
+      selectedImagePath = imagePath;
     });
   }
 
   void _submitData() async {
-    if (selectedImage == null) {
+    if (selectedImagePath == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
             content: Text('❌ Please select an image!'),
@@ -85,15 +85,14 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
       coach: coachController.text,
       weight: weightController.text,
       height: heightController.text,
-      imageUrl: "",
+      imageUrl: selectedImagePath!, // حفظ المسار بدلًا من الصورة
       lacticAcid: lacticAcidController.text,
       city: cityController.text,
       userId: FirebaseAuth.instance.currentUser!.uid,
     );
 
     await FirebaseDataFunctions.addPlayerData(
-        addPlayerDataModel, selectedImage!);
-
+        addPlayerDataModel, File(selectedImagePath!));
     setState(() => isLoading = false);
 
     ScaffoldMessenger.of(context).showSnackBar(

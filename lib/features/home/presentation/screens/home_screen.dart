@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
 
-import 'dart:convert';
-import 'dart:typed_data';
+import 'dart:io';
 import 'package:fitpulse/core/extensions/extensions.dart';
 import 'package:fitpulse/core/models/app_title.dart';
 import 'package:fitpulse/core/utils/app_colors.dart';
@@ -14,6 +13,7 @@ import 'package:fitpulse/firebase/functions/firebase_data_functions.dart';
 import 'package:fitpulse/firebase/models/add_player_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,15 +24,33 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _isSigningOut = false;
+  bool _isRefreshing = false;
+  List<AddPlayerDataModel> _playersList = [];
 
-  /// Convert Base64 string to Uint8List for displaying the image
-  Uint8List? _decodeBase64Image(String base64String) {
+  @override
+  void initState() {
+    super.initState();
+    _fetchPlayers();
+  }
+
+  /// Fetch player data from Firebase
+  Future<void> _fetchPlayers() async {
+    setState(() => _isRefreshing = true);
     try {
-      return base64Decode(base64String);
+      var snapshot = await FirebaseDataFunctions.getPlayersData();
+      setState(() {
+        _playersList = snapshot.docs.map((e) => e.data()).toList();
+      });
     } catch (e) {
-      print("❌ Error decoding Base64: $e");
-      return null;
+      print("❌ Error fetching players: $e");
     }
+    setState(() => _isRefreshing = false);
+  }
+
+  /// Delete player and refresh the list
+  Future<void> _deletePlayer(String playerId, String? imagePath) async {
+    await FirebaseDataFunctions.deletePlayer(playerId, imagePath);
+    _fetchPlayers();
   }
 
   @override
@@ -53,53 +71,81 @@ class _HomeScreenState extends State<HomeScreen> {
           textStyle: AppTextStyles.roboto20MainColor700,
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(22.0.r),
-        child: Column(
-          children: [
-            PlayerCard(),
-            SizedBox(height: 26.h),
-            FutureBuilder(
-              future: FirebaseDataFunctions.getPlayersData(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child:
-                        CircularProgressIndicator(color: AppColors.mainColor),
-                  );
-                }
-                if (snapshot.hasError) {
-                  return Text("Something went wrong",
-                      style: AppTextStyles.errorTextStyle);
-                }
-
-                List<AddPlayerDataModel> playersList =
-                    snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
-
-                return ListView.separated(
+      body: RefreshIndicator(
+        onRefresh: _fetchPlayers,
+        color: AppColors.mainColor,
+        child: Padding(
+          padding: EdgeInsets.all(22.0.r),
+          child: ListView(
+            physics: AlwaysScrollableScrollPhysics(),
+            children: [
+              PlayerCard(),
+              SizedBox(height: 26.h),
+              if (_isRefreshing)
+                Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.mainColor,
+                  ),
+                )
+              else
+                ListView.separated(
                   shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
                   separatorBuilder: (BuildContext context, int index) =>
                       SizedBox(height: 26.h),
-                  itemCount: playersList.length,
+                  itemCount: _playersList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    Uint8List? playerImage = playersList[index].imageUrl != null
-                        ? _decodeBase64Image(playersList[index].imageUrl!)
-                        : null;
+                    String? imagePath = _playersList[index].imageUrl;
+                    ImageProvider imageProvider;
 
-                    return NewPlayerModel(
-                      imageUrl: playerImage != null
-                          ? base64Encode(playerImage)
-                          : null,
-                      name: playersList[index].name,
-                      age: playersList[index].age,
+                    if (imagePath != null && imagePath.isNotEmpty) {
+                      File file = File(imagePath);
+                      if (file.existsSync()) {
+                        imageProvider = FileImage(file);
+                      } else {
+                        print("⚠️ Image not found at path: $imagePath");
+                        imageProvider =
+                            AssetImage("assets/images/default_avatar.png");
+                      }
+                    } else {
+                      imageProvider =
+                          AssetImage("assets/images/default_avatar.png");
+                    }
+
+                    return Slidable(
+                      endActionPane: ActionPane(
+                        extentRatio: .35.w,
+                        motion: const ScrollMotion(),
+                        children: [
+                          SlidableAction(
+                            onPressed: (_) => _deletePlayer(
+                                _playersList[index].id!, imagePath),
+                            backgroundColor: AppColors.errorColor,
+                            foregroundColor: Colors.white,
+                            icon: Icons.delete,
+                            label: 'Delete',
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(12.r),
+                              bottomRight: Radius.circular(12.r),
+                            ),
+                            flex: 1,
+                          ),
+                        ],
+                      ),
+                      child: NewPlayerModel(
+                        imageProvider: imageProvider,
+                        name: _playersList[index].name,
+                        age: _playersList[index].age,
+                        imageUrl: _playersList[index].imageUrl,
+                        imagePath: imagePath,
+                      ),
                     );
                   },
-                );
-              },
-            ),
-            SizedBox(height: 26.h),
-            AddPlayerWidget(),
-          ],
+                ),
+              SizedBox(height: 26.h),
+              AddPlayerWidget(),
+            ],
+          ),
         ),
       ),
     );

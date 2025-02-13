@@ -1,6 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:fitpulse/features/player_info/presentation/widgets/state_cards.dart';
+import 'package:fitpulse/features/player_info/presentation/widgets/marmoush/state_cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';

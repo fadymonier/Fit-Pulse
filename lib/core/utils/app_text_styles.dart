@@ -74,4 +74,6 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w400,
     color: AppColors.errorColor,
   );
+
+  static var roboto16BlackColor400;
 }

@@ -1,9 +1,9 @@
 import 'package:fitpulse/core/extensions/extensions.dart';
-import 'package:fitpulse/features/player_info/presentation/widgets/acceleration_and_distance.dart';
-import 'package:fitpulse/features/player_info/presentation/widgets/ecg_result.dart';
-import 'package:fitpulse/features/player_info/presentation/widgets/fl_chart.dart';
-import 'package:fitpulse/features/player_info/presentation/widgets/lactic_acid_level.dart';
-import 'package:fitpulse/features/player_info/presentation/widgets/state_cards.dart';
+import 'package:fitpulse/features/player_info/presentation/widgets/marmoush/acceleration_and_distance.dart';
+import 'package:fitpulse/features/player_info/presentation/widgets/marmoush/ecg_result.dart';
+import 'package:fitpulse/features/player_info/presentation/widgets/marmoush/fl_chart.dart';
+import 'package:fitpulse/features/player_info/presentation/widgets/marmoush/lactic_acid_level.dart';
+import 'package:fitpulse/features/player_info/presentation/widgets/marmoush/state_cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';

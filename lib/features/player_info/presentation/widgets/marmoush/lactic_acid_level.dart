@@ -1,4 +1,4 @@
-import 'package:fitpulse/features/player_info/presentation/widgets/state_cards.dart';
+import 'package:fitpulse/features/player_info/presentation/widgets/marmoush/state_cards.dart';
 import 'package:flutter/material.dart';
 
 class LacticAcidLevelWidget extends StatelessWidget {
