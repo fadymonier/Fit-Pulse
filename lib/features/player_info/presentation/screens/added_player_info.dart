@@ -8,52 +8,57 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/marmoush/player_statstics.dart';
 
 class AddedPlayerInfo extends StatefulWidget {
-  String? imagePath;
-  String? name;
-  String? phone;
-  String? age;
-  String? couch;
-  String? weight;
-  String? height;
-  String? lacticAcid;
-  String? city;
-  AddedPlayerInfo(
-      {super.key,
-      required this.imagePath,
-      required this.name,
-      required this.phone,
-      required this.age,
-      required this.couch,
-      required this.weight,
-      required this.height,
-      required this.lacticAcid,
-      required this.city});
+  final String? imagePath;
+  final String name;
+  final String phone;
+  final String age;
+  final String couch;
+  final String weight;
+  final String height;
+  final String lacticAcid;
+  final String city;
+
+  const AddedPlayerInfo({
+    super.key,
+    required this.imagePath,
+    required this.name,
+    required this.phone,
+    required this.age,
+    required this.couch,
+    required this.weight,
+    required this.height,
+    required this.lacticAcid,
+    required this.city,
+  });
 
   @override
-  State<AddedPlayerInfo> createState() => _PlayerInfoScreenState();
+  State<AddedPlayerInfo> createState() => _AddedPlayerInfoState();
 }
 
-class _PlayerInfoScreenState extends State<AddedPlayerInfo> {
+class _AddedPlayerInfoState extends State<AddedPlayerInfo> {
   int _selectedIndex = 0;
-
   late List<Widget> _screens;
 
   @override
   void initState() {
     super.initState();
+    _initializeScreens();
+  }
+
+  void _initializeScreens() {
     _screens = [
       AddedPlayerScreenBody(
-        imagePath: widget.imagePath!,
-        name: widget.name!,
-        phone: widget.phone!,
-        age: widget.age!,
-        couch: widget.couch!,
-        weight: widget.weight!,
-        height: widget.height!,
-        lacticAcid: widget.lacticAcid!,
-        city: widget.city!,
+        imagePath: widget.imagePath ?? '',
+        name: widget.name,
+        phone: widget.phone,
+        age: widget.age,
+        couch: widget.couch,
+        weight: widget.weight,
+        height: widget.height,
+        lacticAcid: widget.lacticAcid,
+        city: widget.city,
       ),
-      PlayerStatstics(),
+      const PlayerStatstics(),
     ];
   }
 
@@ -86,7 +91,7 @@ class _PlayerInfoScreenState extends State<AddedPlayerInfo> {
   }
 
   BottomNavigationBarItem _buildNavItem(IconData icon, int index) {
-    bool isSelected = _selectedIndex == index;
+    final isSelected = _selectedIndex == index;
     return BottomNavigationBarItem(
       icon: isSelected
           ? Container(

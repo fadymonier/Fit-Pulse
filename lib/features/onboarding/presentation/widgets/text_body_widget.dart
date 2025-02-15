@@ -10,45 +10,56 @@ class TextBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Lorem ipsum",
-          style: AppTextStyles.roboto14BlackColor700,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Welcome to FitPulse",
+              style: AppTextStyles.roboto14BlackColor700,
+            ),
+            Text(
+              "FitPulse helps you track players' physical measurements effortlessly. \nConnect with our advanced vest to receive real-time data and monitor player progress. \nEasily add, edit, and manage players, all in one place.",
+              style: AppTextStyles.roboto14BlackColor400,
+            ),
+            SizedBox(height: 20.h),
+            Text(
+              "Why Choose FitPulse?",
+              style: AppTextStyles.roboto14BlackColor700,
+            ),
+            Text(
+              "✔ Real-time tracking with cutting-edge technology.\n✔ Simple and intuitive player management.\n✔ Detailed insights to improve performance.\n✔ Perfect for coaches, trainers, and sports teams.\n✔ Secure and reliable data storage with Firebase.",
+              style: AppTextStyles.roboto14BlackColor400,
+            ),
+            SizedBox(height: 20.h),
+            Text(
+              "Get Ready to Boost Performance",
+              style: AppTextStyles.roboto14BlackColor700,
+            ),
+            Text(
+              "FitPulse empowers you to make data-driven decisions. Monitor progress, analyze trends, and help your players reach their full potential.",
+              style: AppTextStyles.roboto14BlackColor400,
+            ),
+            SizedBox(height: 80.h),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: SizedBox(
+                width: double.infinity,
+                child: AppCustomBtn(
+                  color: AppColors.mainColor,
+                  text: "Get Started",
+                  onPressed: () {
+                    context.pushReplacementNamed("/SignIn");
+                  },
+                ),
+              ),
+            ),
+            SizedBox(height: 10.h),
+          ],
         ),
-        Text(
-          "Lorem ipsum dolor sit amet consectetur. Netus\nfringilla parturient elit consectetur. In molestie\nbibendum a enim magnis nisl pellentesque.\nElementum amet quis libero blandit et nunc risus sit.\nDolor ullamcorper nam suspendisse in in nisl. Augue\npellentesque accumsan pharetra et felis nunc mi\nsollicitudin. Eu porta pharetra elit blandit aliquam eu\ncommodo egestas. Vel id leo ultricies lacinia vitae.",
-          style: AppTextStyles.roboto14BlackColor400,
-        ),
-        SizedBox(
-          height: 20.h,
-        ),
-        Text(
-          "Lorem ipsum",
-          style: AppTextStyles.roboto14BlackColor700,
-        ),
-        Text(
-          "Lorem ipsum dolor sit amet consectetur. Netus\nfringilla parturient elit consectetur. In molestie\nbibendum a enim magnis nisl pellentesque.\nElementum amet quis libero blandit et nunc risus sit.\nDolor ullamcorper nam suspendisse in in nisl. Augue\npellentesque accumsan pharetra et felis nunc mi\nsollicitudin. Eu porta pharetra elit blandit aliquam eu\ncommodo egestas. Vel id leo ultricies lacinia vitae.",
-          style: AppTextStyles.roboto14BlackColor400,
-        ),
-        SizedBox(
-          height: 20.h,
-        ),
-        SizedBox(
-          height: 70.h,
-        ),
-        SizedBox(
-          width: double.infinity,
-          child: AppCustomBtn(
-            color: AppColors.mainColor,
-            text: "Get Started",
-            onPressed: () {
-              context.pushReplacementNamed("/SignIn");
-            },
-          ),
-        )
-      ],
+      ),
     );
   }
 }

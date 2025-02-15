@@ -85,7 +85,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
       coach: coachController.text,
       weight: weightController.text,
       height: heightController.text,
-      imageUrl: selectedImagePath!, // حفظ المسار بدلًا من الصورة
+      imageUrl: selectedImagePath!,
       lacticAcid: lacticAcidController.text,
       city: cityController.text,
       userId: FirebaseAuth.instance.currentUser!.uid,

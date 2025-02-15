@@ -20,8 +20,8 @@ class AccelerationWidget extends StatefulWidget {
 }
 
 class AccelerationWidgetState extends State<AccelerationWidget> {
-  double _acceleration = 0.0; // Single acceleration value in m/s²
-  bool _isMoving = false; // Track if the device is moving
+  double _acceleration = 0.0;
+  bool _isMoving = false;
 
   @override
   void initState() {
@@ -84,9 +84,9 @@ class AccelerationWidgetState extends State<AccelerationWidget> {
                     Padding(
                       padding: EdgeInsets.all(12.0.r),
                       child: AppTitle(
-                          title: "Acceleration",
+                          title: "Velocity",
                           showDivider: true,
-                          textStyle: AppTextStyles.roboto20MainColor700),
+                          textStyle: AppTextStyles.roboto16MainColor700),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 12.0.r),
@@ -103,11 +103,11 @@ class AccelerationWidgetState extends State<AccelerationWidget> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
-                  padding: EdgeInsets.all(5.0.r),
+                  padding: EdgeInsets.all(4.0.r),
                   child: Align(
                     alignment: Alignment.bottomRight,
                     child: Icon(Icons.speed,
-                        size: 60.sp, color: AppColors.mainColor),
+                        size: 55.sp, color: AppColors.mainColor),
                   ),
                 ),
               ),

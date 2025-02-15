@@ -1,3 +1,4 @@
+import 'package:fitpulse/core/cache/cache_helper.dart';
 import 'package:fitpulse/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,7 +16,7 @@ class AddPicWidget extends StatefulWidget {
 }
 
 class AddPicWidgetState extends State<AddPicWidget> {
-  String? _imagePath; // بدل File بنستخدم مسار الصورة
+  String? _imagePath;
 
   Future<void> _pickImage() async {
     final pickedFile =
@@ -28,7 +29,7 @@ class AddPicWidgetState extends State<AddPicWidget> {
         _imagePath = savedPath;
       });
 
-      widget.onImageSelected(savedPath); // إرسال المسار بدل ملف الصورة
+      widget.onImageSelected(savedPath);
     }
   }
 
@@ -37,6 +38,7 @@ class AddPicWidgetState extends State<AddPicWidget> {
     final localPath =
         '${directory.path}/${DateTime.now().millisecondsSinceEpoch}.png';
     final savedImage = await imageFile.copy(localPath);
+    await SharedPrefHelper.setData('imagePath', savedImage.path);
     return savedImage.path;
   }
 

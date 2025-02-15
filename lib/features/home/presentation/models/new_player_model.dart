@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:fitpulse/core/utils/app_colors.dart';
 import 'package:fitpulse/core/utils/app_text_styles.dart';
 import 'package:fitpulse/features/player_info/presentation/screens/added_player_info.dart';
@@ -29,9 +28,9 @@ class NewPlayerModel extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => AddedPlayerInfo(
               imagePath: imagePath ?? "assets/images/default_avatar.png",
-              name: name,
+              name: name ?? 'Salah',
               phone: '+21235458564',
-              age: age,
+              age: age ?? '30',
               couch: 'Guardiola',
               weight: '80',
               height: '180',

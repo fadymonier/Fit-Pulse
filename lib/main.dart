@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fitpulse/core/cache/cache_helper.dart';
 import 'package:fitpulse/core/routes/app_router.dart';
 import 'package:fitpulse/core/utils/app_colors.dart';
 import 'package:fitpulse/firebase_options.dart';
@@ -10,6 +11,7 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
+  await SharedPrefHelper.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
