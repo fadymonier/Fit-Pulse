@@ -1,59 +1,77 @@
 import 'package:fitpulse/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-abstract class CustomTextStyles {
-  static final pacifico400style64 = TextStyle(
-    fontSize: 64,
+abstract class AppTextStyles {
+  static final roboto20MainColor700 = GoogleFonts.roboto(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.mainColor,
+  );
+  static final roboto24MainColor700 = GoogleFonts.roboto(
+    fontSize: 24.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.mainColor,
+  );
+  static final roboto14BlackColor700 = GoogleFonts.roboto(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.blackColor,
+  );
+  static final roboto14BlackColor400 = GoogleFonts.roboto(
+    fontSize: 14.sp,
     fontWeight: FontWeight.w400,
+    color: AppColors.blackColor,
+  );
+  static final roboto20BlackColor700 = GoogleFonts.roboto(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.blackColor,
+  );
+  static final roboto16GreyColor700 = GoogleFonts.roboto(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.greyColor,
+  );
+  static final roboto14GreyColor400 = GoogleFonts.roboto(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.greyColor,
+  );
+  static final roboto16MainColor700 = GoogleFonts.roboto(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.mainColor,
+  );
+  static final roboto12MainColor500 = GoogleFonts.roboto(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.mainColor,
+  );
+  static final roboto18BlackColor500 = GoogleFonts.roboto(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.blackColor,
+  );
+  static final roboto18RedColor500 = GoogleFonts.roboto(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.errorColor,
+  );
+  //static final roboto20BlackColor700 = GoogleFonts.roboto(
+  //   fontSize: 20.sp,
+  //   fontWeight: FontWeight.w700,
+  //   color: AppColors.blackColor,
+  // );
+  static final buttonTextStyle = GoogleFonts.roboto(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w800,
     color: AppColors.whiteColor,
-    fontFamily: "Pacifico",
   );
-  static final poppins600style28 = TextStyle(
-    fontSize: 28,
-    fontWeight: FontWeight.w600,
-    color: AppColors.blackColor,
-    fontFamily: "Poppins",
-  );
-  static final poppins400style12 = TextStyle(
-    fontSize: 12,
+  static final errorTextStyle = GoogleFonts.roboto(
+    fontSize: 14.sp,
     fontWeight: FontWeight.w400,
-    // color: AppColors.emailAndPasswordFontGreyColor,
-    fontFamily: "Poppins",
-  );
-  static final poppins500style18 = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.w500,
-    color: AppColors.blackColor,
-    fontFamily: "Poppins",
-  );
-  static const poppins500style24 = TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.w500,
-    color: Colors.black,
-    fontFamily: "Poppins",
-  );
-  static final poppins500style14 = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
-    color: AppColors.blackColor,
-    fontFamily: "Poppins",
-  );
-  static const poppins300style16 = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w300,
-    color: Colors.black,
-    fontFamily: "Poppins",
-  );
-  static final poppins400style20 = TextStyle(
-    fontSize: 20,
-    fontWeight: FontWeight.w400,
-    color: AppColors.blackColor,
-    fontFamily: "Poppins",
-  );
-  static const pacifico700style32 = TextStyle(
-    fontSize: 42,
-    fontWeight: FontWeight.bold,
-    color: Colors.white,
-    fontFamily: "Pacifico",
+    color: AppColors.errorColor,
   );
 }
