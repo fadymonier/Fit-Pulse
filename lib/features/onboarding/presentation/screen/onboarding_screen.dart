@@ -14,23 +14,25 @@ class OnboardingScreen extends StatelessWidget {
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.all(24.0.r),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppTitle(
-              title: 'About Application',
-              showDivider: true,
-              textStyle: AppTextStyles.roboto20MainColor700,
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Image.asset('assets/images/onBoardingPic.png'),
-            SizedBox(
-              height: 10.h,
-            ),
-            TextBodyWidget(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppTitle(
+                title: 'About Application',
+                showDivider: true,
+                textStyle: AppTextStyles.roboto20MainColor700,
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              Image.asset('assets/images/onBoardingPic.png'),
+              SizedBox(
+                height: 10.h,
+              ),
+              TextBodyWidget(),
+            ],
+          ),
         ),
       )),
     );

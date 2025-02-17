@@ -4,6 +4,8 @@ import 'package:fitpulse/core/utils/app_text_styles.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:async';
+import 'dart:math';
 
 class ECGChartWidget extends StatefulWidget {
   final int number;
@@ -16,28 +18,34 @@ class ECGChartWidget extends StatefulWidget {
 
 class ECGChartWidgetState extends State<ECGChartWidget> {
   List<FlSpot> spots = [];
+  late Timer _timer;
+  double xValue = 0;
+  final Random random = Random();
 
   @override
   void initState() {
     super.initState();
-    generateGraphData();
+    _startLiveUpdate();
   }
 
   @override
-  void didUpdateWidget(covariant ECGChartWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.number != widget.number) {
-      generateGraphData();
-    }
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
-  void generateGraphData() {
-    spots = List.generate(
-      10,
-      (index) =>
-          FlSpot(index.toDouble(), (widget.number * (index % 3)).toDouble()),
-    );
-    setState(() {});
+  void _startLiveUpdate() {
+    _timer = Timer.periodic(Duration(milliseconds: 200), (timer) {
+      setState(() {
+        double yValue =
+            widget.number + sin(xValue * 0.1) * 20 + random.nextDouble() * 10;
+        spots.add(FlSpot(xValue, yValue));
+        if (spots.length > 50) {
+          spots.removeAt(0);
+        }
+        xValue++;
+      });
+    });
   }
 
   @override
