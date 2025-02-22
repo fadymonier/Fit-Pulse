@@ -5,7 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppCustomBtn extends StatelessWidget {
   const AppCustomBtn(
-      {super.key, required this.color, required this.text, this.onPressed});
+      {super.key,
+      required this.color,
+      required this.text,
+      required this.onPressed});
   final Color color;
   final String text;
   final VoidCallback? onPressed;

@@ -22,9 +22,8 @@ class MyProvider extends ChangeNotifier {
   Future<void> initUser() async {
     try {
       _userAuthModel = await FirebaseAuthFunctions.readUser();
-      notifyListeners(); // Notify listeners after updating the user model
+      notifyListeners();
     } catch (e) {
-      // Handle any errors that occur during user initialization
       print('Error initializing user: $e');
     }
   }
