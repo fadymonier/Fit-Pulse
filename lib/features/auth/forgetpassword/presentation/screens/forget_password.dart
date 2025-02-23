@@ -54,7 +54,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     padding: EdgeInsets.only(left: 18.0.r),
                     child: AppTitle(
                       title:
-                          "Enter your email below to receive a password reset link!",
+                          "write your username and we will send\nverification code on your registered account",
                       showDivider: false,
                       textStyle: AppTextStyles.roboto16GreyColor700,
                     ),

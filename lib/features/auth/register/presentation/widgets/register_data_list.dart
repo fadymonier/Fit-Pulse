@@ -49,7 +49,7 @@ class RegisterDataListState extends State<RegisterDataList> {
         email: emailController.text,
         password: passwordController.text,
         phone: phoneController.text,
-        gender: 'Male', // You may need to update this dynamically
+        gender: 'Male',
         onSuccess: () {
           setState(() {
             isLoading = false;
