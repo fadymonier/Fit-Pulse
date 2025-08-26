@@ -151,11 +151,6 @@ flutter run
 
 Contributions are welcome. Please open an issue to discuss significant changes. Submit PRs with clear descriptions and testing notes.
 
----
-
-## 📄 License
-
-This project is released under the [MIT License](LICENSE).
 
 ---
 
@@ -163,4 +158,4 @@ This project is released under the [MIT License](LICENSE).
 
 **Fady Monier Fouad** – Mobile App Developer (Flutter)  
 Email: `fadymonier111@gmail.com`  
-Location: Cairo, Egypt
+
